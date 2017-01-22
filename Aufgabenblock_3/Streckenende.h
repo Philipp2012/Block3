@@ -6,7 +6,7 @@ class Streckenende :
 	public FahrAusnahme
 {
 public:
-	Streckenende(Fahrzeug*, Weg*);
+	Streckenende(Fahrzeug* pFahrzeug, Weg* pWeg);
 	~Streckenende();
 	void vBearbeiten();
 };

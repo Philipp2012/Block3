@@ -8,10 +8,12 @@ Weg::Weg()
 }
 
 //Konstruktor mi Name, Länge und Begrenzung
-Weg::Weg(string sName, double dLaenge, Begrenzung eLimit) :AktivesVO(sName)
+Weg::Weg(string sName, double dLaenge, Begrenzung eLimit, bool bUeberholverbot) :AktivesVO(sName)
 {
 	p_dLaenge = dLaenge;
 	p_eLimit = eLimit;
+	p_bUeberholverbot = bUeberholverbot;
+	p_dSchranke = p_dLaenge;
 } 
 
 //Destruktor
@@ -19,17 +21,39 @@ Weg::~Weg()
 {
 }
 
-//Gitb die Länge des Weges aus
-double Weg::dGetLaenge() const
+//Gibt die Länge des Weges aus
+double Weg::dGetLaenge() { return p_dLaenge; }
+
+//Gibt die Schranke des Weges aus
+double Weg::dGetSchranke() 
 {
+	if (p_bUeberholverbot)
+	{
+		return p_dSchranke;
+	}
+	
 	return p_dLaenge;
 }
+
+//Gibt das Limit des Weges aus
+int Weg::iGetLimit() { return p_eLimit; }
+
+//Setzt die neue Schranke
+void Weg::vSetSchranke(double dStrecke) { p_dSchranke = dStrecke; }
+
+//Setzt den Rueckweg
+void Weg::vSetRueckweg(Weg* pWeg) { p_pRueckweg = pWeg; }
+
+//Setzt die Kreuzung auf die die Strasse fuehrt
+void Weg::vSetKreuzung(Kreuzung* pKreuz) { p_pKreuzung = pKreuz; }
 
 //Fertigt die Fahrzeuge auf dem Weg ab
 void Weg::vAbfertigung()
 {
 	LazyListe<Fahrzeug*>::iterator itL;
 	itL = p_pFahrzeuge.begin();
+
+	p_dSchranke = p_dLaenge;
 
 	while (p_pFahrzeuge.end() != itL)
 	{
@@ -43,14 +67,11 @@ void Weg::vAbfertigung()
 		{
 			pAusnahme->vBearbeiten();
 		}
+
 		itL++;
 	}
+
 	p_pFahrzeuge.vAktualisieren();
-
-	/*for (LazyListe<Fahrzeug*>::iterator itK = p_pFahrzeuge.begin(); itK != p_pFahrzeuge.end(); itK++)
-	{
-
-	}*/
 
 }
 
@@ -106,9 +127,5 @@ ostream& Weg::ostreamAusgabe(ostream& daten)
 	return daten;
 }
 
-//Gibt das Limit des Weges aus
-int Weg::iGetLimit()
-{
-	return p_eLimit;
-}
+
 

@@ -4,7 +4,7 @@ class Losfahren :
 	public FahrAusnahme
 {
 public:
-	Losfahren(Fahrzeug*, Weg*);
+	Losfahren(Fahrzeug* pFahrzeug, Weg* pWeg);
 	~Losfahren();
 	void vBearbeiten();
 };

@@ -3,6 +3,7 @@
 #include "LazyListe.h"
 
 class Fahrzeug;
+class Kreuzung;
 typedef list<Fahrzeug*> ListFahrzeug;
 enum Begrenzung { Innerorts = 50, Landstraﬂe = 100, Autobahn = -1 }; //Innerorts, Landstraﬂe, Autobahn
 
@@ -13,7 +14,7 @@ class Weg :
 //Anlegung von Aufz‰hlung Begrenzung zur Nutzung im Konstruktor
 public:
 	Weg();
-	Weg(string sName, double dLaenge, Begrenzung eLimit = Innerorts);
+	Weg(string sName, double dLaenge, Begrenzung eLimit = Innerorts, bool bUeberholverbot = true);
 	~Weg();
 
 
@@ -22,8 +23,15 @@ public:
 	void vAnnahme(Fahrzeug*, double);
 	void vAbgabe(Fahrzeug*);
 
-	double dGetLaenge() const;
+	//Getter
+	double dGetLaenge();
+	double dGetSchranke();
 	int iGetLimit();
+
+	//Setter
+	void vSetSchranke(double dStrecke);
+	void vSetRueckweg(Weg* pWeg);
+	void vSetKreuzung(Kreuzung* pKreuz);
 
 	ostream& ostreamAusgabe(ostream&);
 
@@ -31,6 +39,10 @@ private:
 	double p_dLaenge;
 	LazyListe<Fahrzeug*> p_pFahrzeuge;
 	Begrenzung p_eLimit;
+	bool p_bUeberholverbot;
+	double p_dSchranke;
 
+	Weg* p_pRueckweg;
+	Kreuzung* p_pKreuzung;	//Kreuzung am Ende der Strasse
 };
 

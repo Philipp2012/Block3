@@ -6,8 +6,8 @@ class FzgParken :
 	public FzgVerhalten
 {
 public:
-	FzgParken(Weg* Weg);
-	FzgParken(Weg* Weg, double dStartzeit);
+	FzgParken(Weg* pWeg);
+	FzgParken(Weg* pWeg, double dStartzeit);
 	~FzgParken();
 
 	double dStrecke(Fahrzeug*, double Zeitraum);

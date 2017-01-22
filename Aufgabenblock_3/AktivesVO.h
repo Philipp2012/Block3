@@ -17,11 +17,11 @@ class AktivesVO
 {
 public:
 	AktivesVO();
-	AktivesVO(string);
+	AktivesVO(string sName);
 	~AktivesVO();
 
 
-	//gemeinsam genutzte Methoden von Fahrzeug und Weg
+	//Gemeinsam genutzte Methoden von Fahrzeug und Weg
 	virtual void vAbfertigung()=0;
 
 	//Überladung der Operatoren

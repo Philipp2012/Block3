@@ -17,11 +17,10 @@ Fahrzeug::Fahrzeug(string sName): AktivesVO(sName)
 }
 
 //Konstruktor mit Name und MaxGeschwindigkeit
-Fahrzeug::Fahrzeug(string sName, double dMaxGeschwindigkeit, double dAbschnittStrecke) :AktivesVO(sName)
+Fahrzeug::Fahrzeug(string sName, double dMaxGeschwindigkeit) :AktivesVO(sName)
 {
 	Fahrzeug::vInitialisierung();
 	p_dMaxGeschwindigkeit = dMaxGeschwindigkeit;
-	p_dAbschnittStrecke = dAbschnittStrecke;
 
 }
 
@@ -64,14 +63,12 @@ void Fahrzeug::vAbfertigung()
 	}
 	else
 	{
-		//p_dGesamtStrecke += gZeitschritt * this->dGeschwindigkeit();
 		double tempStrecke = p_pVerhalten->dStrecke(this, gZeitschritt);
 		p_dAbschnittStrecke += tempStrecke;
 		p_dGesamtStrecke += tempStrecke;
 	}
 	
 	p_dZeit = dGlobaleZeit;
-	//zeichnen
 }
 
 //Default Funktion für alle Tochterklassen

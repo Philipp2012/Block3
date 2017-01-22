@@ -6,7 +6,7 @@ class FzgFahren :
 	public FzgVerhalten
 {
 public:
-	FzgFahren(Weg* Weg);
+	FzgFahren(Weg* pWeg);
 	~FzgFahren();
 
 	double dStrecke(Fahrzeug*, double Zeitraum);

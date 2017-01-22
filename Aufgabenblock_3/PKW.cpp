@@ -9,7 +9,7 @@ PKW::PKW() : Fahrzeug()
 }
 
 //Konstruktor mit allen Attributen
-PKW::PKW(string sName, double dMaxGeschwindigkeit, double dVerbrauch, double dTankvolumen, double dAbschnittStrecke):Fahrzeug(sName, dMaxGeschwindigkeit, dAbschnittStrecke)
+PKW::PKW(string sName, double dMaxGeschwindigkeit, double dVerbrauch, double dTankvolumen):Fahrzeug(sName, dMaxGeschwindigkeit)
 {
 	p_dVerbrauch = dVerbrauch/100;
 	p_dTankvolumen = dTankvolumen;
@@ -44,11 +44,12 @@ double PKW::dTanken(double dMenge)
 {
 	double dTankDif = p_dTankvolumen - p_dTankinhalt;
 
-	if (dMenge >= dTankDif)
+	if (dMenge < 0)
 	{
+		p_dTankinhalt = p_dTankvolumen;
 		cout << "Das Fahrzeug " << p_sName << " wurde mit " << dTankDif << "l voll getankt!" << endl;
 		p_dTankinhalt = p_dTankvolumen;
-		
+
 		return dTankDif;
 	}
 	else

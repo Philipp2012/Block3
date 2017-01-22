@@ -1,4 +1,6 @@
 #include "Fahrrad.h"
+#include "FzgParken.h"
+#include "FzgFahren.h"
 
 
 //Standard-Konstruktor
@@ -37,4 +39,11 @@ double Fahrrad::dGeschwindigkeit()
 	}
 
 	return dAktuelleGeschwindigkeit;
+}
+
+void Fahrrad::vZeichnen(Weg* pWeg)
+{
+	double dRelPos = p_dAbschnittStrecke / (pWeg->dGetLaenge());
+
+	bZeichneFahrrad(p_sName, pWeg->getName(), dRelPos, dGeschwindigkeit());
 }

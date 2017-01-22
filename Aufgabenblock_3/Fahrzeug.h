@@ -14,8 +14,8 @@ class Fahrzeug :
 public:
 	//Konstruktoren
 	Fahrzeug();
-	Fahrzeug(string);			//Mit Name
-	Fahrzeug(string, double, double=0);	//Mit Name und MaxGeschwindigkeit und AbschnittStrecke
+	Fahrzeug(string sName);			
+	Fahrzeug(string sName, double dMaxKmh);
 	
 	//Copyconstruktor
 	Fahrzeug(const Fahrzeug&);
@@ -25,7 +25,7 @@ public:
 	
 	//Methoden
 	virtual void vAbfertigung();
-	virtual double dTanken(double dMenge = 666);
+	virtual double dTanken(double dMenge = -1);
 	virtual double dGeschwindigkeit();
 	virtual void vNeueStrecke(Weg*);				//Fahrendes Fahrzeug
 	virtual void vNeueStrecke(Weg*, double);		//Parkendes Fahrzeug

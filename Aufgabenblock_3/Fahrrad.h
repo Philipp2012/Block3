@@ -12,13 +12,15 @@ class Fahrrad :
 public:
 	//Konstruktoren
 	Fahrrad();
-	Fahrrad(string, double);	//Name, MaxGeschwindigkeit
+	Fahrrad(string sName, double dMaxKmh);	//Name, MaxGeschwindigkeit
 
 	//Copyconstructor
 	Fahrrad(const Fahrrad&);
 
 	//Destruktor
 	~Fahrrad();
+
+	void vZeichnen(Weg*);
 
 private:
 	double dGeschwindigkeit();
