@@ -19,5 +19,5 @@ void Losfahren::vBearbeiten()
 	p_pWeg->vAbgabe(p_pFahrzeug);
 	p_pWeg->vAnnahme(p_pFahrzeug);
 
-	cout << "Ausnahme: Losfahren; Fahrzeug, Startzeit und Name: " << p_pFahrzeug->getName() << " " << dGlobaleZeit << " " << p_pWeg->getName() << endl;
+	cout << "Ausnahme: Losfahren; Fahrzeug, Startzeit und Name: " << p_pFahrzeug->getName() << " " << dGlobaleZeit << " " << p_pWeg->getName() << endl << endl;
 }
