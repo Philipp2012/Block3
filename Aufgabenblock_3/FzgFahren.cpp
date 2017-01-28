@@ -14,7 +14,7 @@ FzgFahren::~FzgFahren()
 }
 
 
-//
+//Gibt die noch tatsächlich im nächsten Zeitschritt fahrbare Strecke aus
 double FzgFahren::dStrecke(Fahrzeug* pFzg, double dZeitraum)
 {
 	double dFahrbareStrecke = pFzg->dGeschwindigkeit() * dZeitraum;

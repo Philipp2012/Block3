@@ -160,13 +160,13 @@ void vAufgabe_8()
 	bInitialisiereGrafik(1500, 1000);
 
 	//Kreuzungen initialisieren
-	Kreuzung* Kr1 = new Kreuzung("Kr1");
+	Kreuzung* Kr1 = new Kreuzung("Kreuzung1");
 	bZeichneKreuzung(680, 40);
-	Kreuzung* Kr2 = new Kreuzung("Kr2", 1000);
+	Kreuzung* Kr2 = new Kreuzung("Kreuzung2", 1000);
 	bZeichneKreuzung(680, 300);
-	Kreuzung* Kr3 = new Kreuzung("Kr3");
+	Kreuzung* Kr3 = new Kreuzung("Kreuzung3");
 	bZeichneKreuzung(680, 570);
-	Kreuzung* Kr4 = new Kreuzung("Kr4");
+	Kreuzung* Kr4 = new Kreuzung("Kreuzung4");
 	bZeichneKreuzung(320, 300);
 
 	//Kreuzungen verbinden und Strassen erstellen
@@ -177,37 +177,71 @@ void vAufgabe_8()
 	Kr3->vVerbinde("W34", "W43", 85, Kr4, Autobahn, false);
 	Kr4->vVerbinde("W44a", "W44b", 130, Kr4, Landstraße, false);
 
+	//Zeichnen
 	int coord1[] = { 680, 40, 680, 300 };
-	bZeichneStrasse("w12", "w21", 40, 2, coord1);
+	bZeichneStrasse("W12", "W21", 40, 2, coord1);
 	int coord2[] = { 680, 300, 850, 300, 970, 390, 970, 500, 850, 570, 680, 570 };
-	bZeichneStrasse("w23a", "w32a", 115, 6, coord2);
+	bZeichneStrasse("W23a", "W32a", 115, 6, coord2);
 	int coord3[] = { 680, 300, 680, 570 };
-	bZeichneStrasse("w23b", "w32b", 40, 2, coord3);
+	bZeichneStrasse("W23b", "W32b", 40, 2, coord3);
 	int coord4[] = { 680, 300, 320, 300 };
-	bZeichneStrasse("w24", "w42", 55, 2, coord4);
+	bZeichneStrasse("W24", "W42", 55, 2, coord4);
 	int coord5[] = { 680, 570, 500, 570, 350, 510, 320, 420, 320, 300 };
-	bZeichneStrasse("w34", "w43", 85, 5, coord5);
+	bZeichneStrasse("W34", "W43", 85, 5, coord5);
 	int coord6[] = { 320, 300, 170, 300, 70, 250, 80, 90, 200, 60, 320, 150, 320, 300 };
-	bZeichneStrasse("w44a", "w44b", 130, 7, coord6);
+	bZeichneStrasse("W44a", "W44b", 130, 7, coord6);
 
-	PKW* PKW1 = new PKW("PKW1", 150, 5);
+	//PKWs erstellen
+	PKW* PKW1 = new PKW("PKW1", 150, 10);
 	PKW* PKW2 = new PKW("PKW2", 150, 3);
 	PKW* PKW3 = new PKW("PKW3", 200, 8);
 	PKW* PKW4 = new PKW("PKW4", 50, 7);
+	PKW* LKW1 = new PKW("LKW1", 80, 15, 80);
+	PKW* LKW2 = new PKW("LKW2", 80, 15, 80);
 
+	//Fahrräder erstellen
 	Fahrrad* Fahrrad1 = new Fahrrad("Fahrrad1", 30);
 	Fahrrad* Fahrrad2 = new Fahrrad("Fahrrad2", 15);
+	Fahrrad* Rennrad1 = new Fahrrad("Rennrad1", 45);
 
-	Kr1->vAnnahme(PKW1, 10);
-	Kr1->vAnnahme(PKW2, 10);
-	Kr1->vAnnahme(PKW3, 10);
-	Kr1->vAnnahme(PKW4, 10);
+	//Annahme
+	Kr1->vAnnahme(PKW1, 0.05);
+	Kr1->vAnnahme(PKW2, 0.05);
+	Kr2->vAnnahme(PKW3, 0.1);
+	Kr2->vAnnahme(LKW2, 3.0);
+	Kr3->vAnnahme(Rennrad1, 3.0);
+	Kr3->vAnnahme(PKW4, 0.1);
+	Kr3->vAnnahme(LKW1, 1.0);
+	Kr4->vAnnahme(Fahrrad2, 0.01);
+	Kr4->vAnnahme(Fahrrad1, 0.01);
 
-	Kr1->vAbfertigung();
-	cout << *Kr1 << endl;
 
+	while (dGlobaleZeit < 10)
+	{
+		vSetzeZeit(dGlobaleZeit);
+		Kr1->vAbfertigung();
+		Kr2->vAbfertigung();
+		Kr3->vAbfertigung();
+		Kr4->vAbfertigung();
+
+		cout << "Nach " << dGlobaleZeit << "h:" << endl;
+		cout << *Kr1 << endl;
+		cout << *Kr2 << endl;
+		cout << *Kr3 << endl;
+		cout << *Kr4 << endl;
+		dGlobaleZeit += gZeitschritt;
+
+		vSleep(5);
+	}
+
+	cout << endl << "Druecken sie eine Taste um die Simulation zu beenden" << endl;
 	getchar();
 	vBeendeGrafik();
+
+	delete Kr1;
+	delete Kr2;
+	delete Kr3;
+	delete Kr4;
 }
 
 int main()

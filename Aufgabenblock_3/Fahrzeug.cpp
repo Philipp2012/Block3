@@ -66,6 +66,7 @@ void Fahrzeug::vAbfertigung()
 		double tempStrecke = p_pVerhalten->dStrecke(this, gZeitschritt);
 		p_dAbschnittStrecke += tempStrecke;
 		p_dGesamtStrecke += tempStrecke;
+		p_dAktGeschwindigkeit = tempStrecke / gZeitschritt;
 	}
 	
 	p_dZeit = dGlobaleZeit;
@@ -90,6 +91,8 @@ void Fahrzeug::vNeueStrecke(Weg* pWeg)
 	delete p_pVerhalten;
 	FzgFahren* tempObj = new FzgFahren(pWeg);
 	p_pVerhalten = tempObj;
+
+	p_dAbschnittStrecke = 0;
 }
 
 //Parkendes Fahrzeug
@@ -98,8 +101,11 @@ void Fahrzeug::vNeueStrecke(Weg* pWeg, double dStartzeit)
 	delete p_pVerhalten;
 	FzgParken* tempObj = new FzgParken(pWeg, dStartzeit);
 	p_pVerhalten = tempObj;
+
+	p_dAbschnittStrecke = 0;
 }
 
+//Virtuelle Funktion zum Zeichnen, wird in Fahrrad und PKW überladen
 void Fahrzeug::vZeichnen(Weg *)
 {
 }
@@ -140,12 +146,8 @@ Fahrzeug& Fahrzeug::operator =(Fahrzeug& fahrzeug)
 	return *this;
 }
 
-FzgVerhalten* Fahrzeug::getVerhalten() const
-{
-	return p_pVerhalten;
-}
+//Gibt das Verhalten des Fahrzeuges zurück
+FzgVerhalten* Fahrzeug::getVerhalten() const {	return p_pVerhalten; }
 
-double Fahrzeug::getAbschnittStrecke() const
-{
-	return p_dAbschnittStrecke;
-}
+//Gibt den aktuellen Streckenabschnitt zurück
+double Fahrzeug::getAbschnittStrecke() const{ return p_dAbschnittStrecke; }

@@ -6,11 +6,14 @@ class FzgParken :
 	public FzgVerhalten
 {
 public:
-	FzgParken(Weg* pWeg);
-	FzgParken(Weg* pWeg, double dStartzeit);
-	~FzgParken();
+	//Konstruktor und Destruktor
+	FzgParken(Weg* pWeg, double dStartzeit);	//Parkende Fahrzeuge
+	virtual ~FzgParken();
 
+	//Methoden
 	double dStrecke(Fahrzeug*, double Zeitraum);
+
+	//Getter
 	int getSpeed() const;
 
 private:

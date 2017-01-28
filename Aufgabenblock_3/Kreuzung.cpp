@@ -10,6 +10,14 @@ Kreuzung::Kreuzung(string sName, double dTankstelle):AktivesVO(sName)
 
 Kreuzung::~Kreuzung()
 {
+	list<Weg*>::iterator itL;
+
+	for (itL = p_pWege.begin(); itL != p_pWege.end(); itL++)
+	{
+		delete (*itL);
+	}
+
+	cout << "Kreuzung '" << p_sName << "' wurde geloescht" << endl << endl;
 }
 
 //Funktion zum Verbinden zweier Kreuzungen. Strassen in Relation zur zu verbindenden Kreuzung
@@ -33,6 +41,7 @@ void Kreuzung::vVerbinde(string sWegHin, string sWegZurueck, double dLaenge, Kre
 	pKreuzung->vAddWeg(WegRueck);
 }
 
+//Tankt angenommene Autos, falls noch Benzin vorhanden
 void Kreuzung::vTanken(Fahrzeug* pFzg)
 {
 	if (p_dTankstelle > 0)
@@ -41,12 +50,29 @@ void Kreuzung::vTanken(Fahrzeug* pFzg)
 	}
 }
 
+//Stellt ein Auto aufgetankt und fahrend auf den ersten Weg auf der Liste
+void Kreuzung::vAnnahme(Fahrzeug * pFzg, Weg* pWeg)
+{
+	vTanken(pFzg);
+
+	Weg* pNeuerWeg = ptZufaelligerWeg(pWeg);
+	pNeuerWeg->vAnnahme(pFzg);
+
+	cout << "Umsetzen von " << pFzg->getName() << ":" << endl
+		<< setw(9) << setfill(' ') << "ZEIT" << ":" << dGlobaleZeit << endl
+		<< setw(9) << setfill(' ') << "KREUZUNG" << ":" << p_sName << "   Tankinhalt: " << p_dTankstelle << "l" << endl
+		<< setw(9) << setfill(' ') << "WECHSEL" << ":" << pWeg->getName() << " -> " << pNeuerWeg->getName() << endl
+		<< setw(9) << setfill(' ') << "FAHRZEUG" << ":" << pFzg->getName() << endl << endl;
+}
+
 //Stellt ein Auto aufgetankt und parkend auf den ersten Weg auf der Liste
 void Kreuzung::vAnnahme(Fahrzeug * pFzg, double dStartzeit)
 {
 	vTanken(pFzg);
 
 	(*p_pWege.begin())->vAnnahme(pFzg, dStartzeit);
+
+
 }
 
 //Fertigt alle von der Kreuzung abgehende Wege ab
@@ -63,20 +89,51 @@ void Kreuzung::vAbfertigung()
 //Setzt einen wegfuehrenden Weg ans Ende der Liste
 void Kreuzung::vAddWeg(Weg* pWeg) { p_pWege.push_back(pWeg); }
 
+//Ausgabe
 ostream& Kreuzung::ostreamAusgabe(ostream& daten)
 {
-	AktivesVO::ostreamAusgabe(daten) << "     ( ";
+	AktivesVO::ostreamAusgabe(daten) << endl;
+	int i = 1;
 
-	list<Weg*>::iterator itL;
-	itL = p_pWege.begin();
-
-	while (p_pWege.end() != itL)
+	for (list<Weg*>::iterator itL = p_pWege.begin(); p_pWege.end() != itL; itL++)
 	{
-		daten << *(*itL) << " ";
-		itL++;
+		daten << i << ". Strasse: ( " << *(*itL) << " ) " << endl;
+		i++;
 	}
 
-	daten << ")";
+	//daten << ")";
 
 	return daten;
+}
+
+
+/*
+Wählt einen zufälligen Weg aus der Liste aus, der nicht der Rückweg des übergebenen Weges ist, außer es ist eine Sackgasse.
+Dafür durchläuft es eine do-while Schleife in dem ein zufälliger Weg ausgewählt wird, bis einer gefunden wird, der nicht der Rückweg ist.
+*/
+Weg* Kreuzung::ptZufaelligerWeg(Weg* pWeg)
+{
+	if (p_pWege.size() == 1)
+	{
+		return *(p_pWege.begin());
+	}
+	
+	list<Weg*>::iterator itL;
+	Weg* rueck = pWeg->vGetRueckweg();
+	
+	do 
+	{
+		itL = p_pWege.begin();
+		int zahl = rand() % p_pWege.size();
+		
+		for (int i = 0; i < zahl; i++)
+		{
+			itL++;
+		}
+
+	} 
+	while ((*itL)->getName() == rueck->getName());
+	
+	return *itL;
+
 }

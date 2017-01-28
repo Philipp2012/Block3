@@ -6,8 +6,11 @@ class Streckenende :
 	public FahrAusnahme
 {
 public:
+	//Konstruktor und Destruktor
 	Streckenende(Fahrzeug* pFahrzeug, Weg* pWeg);
-	~Streckenende();
+	virtual ~Streckenende();
+
+	//Methoden
 	void vBearbeiten();
 };
 

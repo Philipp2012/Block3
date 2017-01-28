@@ -4,8 +4,11 @@ class Losfahren :
 	public FahrAusnahme
 {
 public:
+	//Konstruktor und Destruktor
 	Losfahren(Fahrzeug* pFahrzeug, Weg* pWeg);
-	~Losfahren();
+	virtual ~Losfahren();
+
+	//Methoden
 	void vBearbeiten();
 };
 

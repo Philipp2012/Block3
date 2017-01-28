@@ -18,7 +18,7 @@ public:
 	PKW(const PKW&); 
 
 	//Destruktor
-	~PKW();
+	virtual ~PKW();
 
 	//Methoden
 	void vAbfertigung();

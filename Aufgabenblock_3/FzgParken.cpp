@@ -4,9 +4,6 @@
 
 
 
-FzgParken::FzgParken(Weg* Weg):FzgVerhalten(Weg)
-{
-}
 
 FzgParken::FzgParken(Weg* Weg, double dStartzeit) : FzgVerhalten(Weg)
 {

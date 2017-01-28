@@ -52,6 +52,7 @@ protected:
 	double p_dGesamtZeit;
 	double p_dZeit;
 	double p_dAbschnittStrecke;
+	double p_dAktGeschwindigkeit = 0;
 	FzgVerhalten* p_pVerhalten;
 
 };

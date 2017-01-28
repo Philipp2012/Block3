@@ -5,7 +5,7 @@
 #include <list>
 #include <math.h>
 #include "SimuClient.h"
-#define gZeitschritt 0.3
+#define gZeitschritt 0.05
 #define epsilon 0.0001
 
 using namespace std;
@@ -16,9 +16,10 @@ extern double dGlobaleZeit;
 class AktivesVO
 {
 public:
+	//Konstruktor und Destruktor
 	AktivesVO();
 	AktivesVO(string sName);
-	~AktivesVO();
+	virtual ~AktivesVO();
 
 
 	//Gemeinsam genutzte Methoden von Fahrzeug und Weg

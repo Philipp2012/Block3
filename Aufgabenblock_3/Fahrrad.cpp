@@ -21,11 +21,13 @@ Fahrrad::Fahrrad(const Fahrrad& fahrrad) : Fahrzeug(fahrrad)
 //Destruktor
 Fahrrad::~Fahrrad()
 {
+	cout << "Fahrrad '" << p_sName << "' wurde geloescht" << endl;
 }
 
 /*
 Funktion zur Ausgabe der aktuellen Geschwindigkeit.
 Geschwindigkeit nimmt alle 20km um 10% ab, bleibt bei minimal 12km/h
+Außer die MaxGeschwindigkeit lag schon unter 12km/h
 */
 double Fahrrad::dGeschwindigkeit()
 {
@@ -33,17 +35,31 @@ double Fahrrad::dGeschwindigkeit()
 
 	double dAktuelleGeschwindigkeit = p_dMaxGeschwindigkeit * pow(0.9, iAnzahl_20km);
 
-	if (dAktuelleGeschwindigkeit < 12)
+	if (p_dMaxGeschwindigkeit < 12)
 	{
-		dAktuelleGeschwindigkeit = 12;
+		return p_dMaxGeschwindigkeit;
+	}
+	else if (dAktuelleGeschwindigkeit < 12)
+	{
+		return 12.0;
 	}
 
 	return dAktuelleGeschwindigkeit;
 }
 
+//Zeichnet das Fahrrad
 void Fahrrad::vZeichnen(Weg* pWeg)
 {
-	double dRelPos = p_dAbschnittStrecke / (pWeg->dGetLaenge());
+	double dRelPos;
 
-	bZeichneFahrrad(p_sName, pWeg->getName(), dRelPos, dGeschwindigkeit());
+	if (p_dAbschnittStrecke == 0.0)
+	{
+		dRelPos = epsilon;
+	}
+	else
+	{
+		dRelPos = p_dAbschnittStrecke / (pWeg->dGetLaenge());
+	}
+
+	bZeichneFahrrad(p_sName, pWeg->getName(), dRelPos, p_dAktGeschwindigkeit);
 }

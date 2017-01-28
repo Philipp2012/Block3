@@ -2,12 +2,13 @@
 
 int AktivesVO::p_iMaxID = 1;
 
+//Standardkonstruktor
 AktivesVO::AktivesVO()
 {
 	vInitialisierung();
 }
 
-
+//Konstruktor mit Namen
 AktivesVO::AktivesVO(string sName)
 {
 	vInitialisierung();
@@ -15,11 +16,8 @@ AktivesVO::AktivesVO(string sName)
 	this->p_sName = sName;
 }
 
-//Konstruktor mit lokaler Zeit fehlt noch
-
-AktivesVO::~AktivesVO()
-{
-}
+//Destruktor
+AktivesVO::~AktivesVO() {}
 
 //Initialisierungsfunktion von AkitvesVo
 void AktivesVO::vInitialisierung()
@@ -30,28 +28,17 @@ void AktivesVO::vInitialisierung()
 	p_iMaxID++;
 }
 
-//nicht definiert, weil rein virtuelle Funktion. Definition in Unterklassen
-/*void AktivesVO::vAbfertigung()
-{
-}*/
-
 //Überladung von <<
-ostream& operator << (ostream& daten, AktivesVO& VO)
-{
-	return VO.ostreamAusgabe(daten);
-}
+ostream& operator << (ostream& daten, AktivesVO& VO) { return VO.ostreamAusgabe(daten);}
 
 //Aufbau der AktivesVO Ausgabe mit ostream
 ostream& AktivesVO::ostreamAusgabe(ostream& daten)
 {
 	daten << setw(4) << resetiosflags(ios::right) << setiosflags(ios::left) << setfill(' ')
-		<< p_iID << setw(9) << setfill(' ') << p_sName ;
+		<< "ID: " << setw(4) << setfill(' ') << p_iID << setw(9) << setfill(' ') << p_sName ;
 
 	return daten;
 }
 
-
-string AktivesVO::getName() const
-{
-	return this->p_sName;
-}
+//Gibt den Namen des VO zurück
+string AktivesVO::getName() const { return this->p_sName; }

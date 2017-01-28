@@ -19,6 +19,12 @@ Weg::Weg(string sName, double dLaenge, Begrenzung eLimit, bool bUeberholverbot) 
 //Destruktor
 Weg::~Weg()
 {
+	for (LazyListe<Fahrzeug*>::iterator itL = p_pFahrzeuge.begin(); itL != p_pFahrzeuge.end(); itL++)
+	{
+		delete (*itL);
+	}
+
+	cout << "Strasse '" << p_sName << "' wurde geloescht" << endl;
 }
 
 //Gibt die Länge des Weges aus
@@ -44,8 +50,14 @@ void Weg::vSetSchranke(double dStrecke) { p_dSchranke = dStrecke; }
 //Setzt den Rueckweg
 void Weg::vSetRueckweg(Weg* pWeg) { p_pRueckweg = pWeg; }
 
+//Gibt den Rueckweg aus
+Weg* Weg::vGetRueckweg() { return p_pRueckweg; }
+
 //Setzt die Kreuzung auf die die Strasse fuehrt
 void Weg::vSetKreuzung(Kreuzung* pKreuz) { p_pKreuzung = pKreuz; }
+
+//Getter für Kreuzung auf die Straße führt
+Kreuzung* Weg::vGetKreuzung() { return p_pKreuzung; }
 
 //Fertigt die Fahrzeuge auf dem Weg ab
 void Weg::vAbfertigung()
@@ -111,15 +123,18 @@ void Weg::vAbgabe(Fahrzeug* pFzg)
 //Ausgabe des Weges und der darauf befindlichen Fahrzeuge
 ostream& Weg::ostreamAusgabe(ostream& daten)
 {
-	AktivesVO::ostreamAusgabe(daten) << p_dLaenge << "     ( ";
+	AktivesVO::ostreamAusgabe(daten) << p_dLaenge << "    ( ";
 
-	LazyListe<Fahrzeug*>::iterator itL;
-	itL = p_pFahrzeuge.begin();
-
-	while (p_pFahrzeuge.end() != itL)
+	if (p_pFahrzeuge.empty())
 	{
-		daten << (*itL)->getName() << " ";
-		itL++;
+		daten << "Leer";
+	}
+	else
+	{
+		for (LazyListe<Fahrzeug*>::iterator itL = p_pFahrzeuge.begin(); p_pFahrzeuge.end() != itL; itL++)
+		{
+			daten << (*itL)->getName() << ", ";
+		}
 	}
 
 	daten << ")";

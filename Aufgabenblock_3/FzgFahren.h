@@ -6,9 +6,11 @@ class FzgFahren :
 	public FzgVerhalten
 {
 public:
+	//Konstruktor und Destruktor
 	FzgFahren(Weg* pWeg);
-	~FzgFahren();
+	virtual ~FzgFahren();
 
+	//Methoden
 	double dStrecke(Fahrzeug*, double Zeitraum);
 	int getSpeed() const;
 };

@@ -18,8 +18,9 @@ public:
 	Fahrrad(const Fahrrad&);
 
 	//Destruktor
-	~Fahrrad();
+	virtual ~Fahrrad();
 
+	//Methoden
 	void vZeichnen(Weg*);
 
 private:

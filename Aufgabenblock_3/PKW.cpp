@@ -27,6 +27,7 @@ PKW::PKW(const PKW& pkw):Fahrzeug(pkw)
 //Destruktor (virtuell)
 PKW::~PKW()
 {
+	cout << "PKW '" << p_sName << "' wurde geloescht" << endl;
 }
 
 //Gibt den Gesamtverbrauch zurück
@@ -78,33 +79,48 @@ void PKW::vAbfertigung()
 
 		p_dTankinhalt -= (p_dVerbrauch) *(p_dGesamtStrecke - dGesamtstreckeAlt);
 
-		if (p_dTankinhalt < 0)
+		if (p_dTankinhalt <= 0)
 		{
 			p_dTankinhalt = 0;
+			p_dAktGeschwindigkeit = 0.0;
 		}
 	}
 }
 
+
 void PKW::vZeichnen(Weg* pWeg)
 {
-	double dRelPos = p_dAbschnittStrecke / (pWeg->dGetLaenge());
+	double dRelPos;
+		
+	if (p_dAbschnittStrecke == 0.0)
+	{
+		dRelPos = epsilon;
+	}
+	else
+	{
+		dRelPos = p_dAbschnittStrecke / (pWeg->dGetLaenge());
+	}
 	
-	bZeichnePKW(p_sName, pWeg->getName(), dRelPos, dGeschwindigkeit(), p_dTankinhalt);
+	bZeichnePKW(p_sName, pWeg->getName(), dRelPos, p_dAktGeschwindigkeit, p_dTankinhalt);
 }
 
 
 //Ausgabe der maximalen Gechwindigkeit als aktuelle Geschwindigkeit
 double PKW::dGeschwindigkeit()
 {
-	double d_StreckenGeschwindigkeit = p_pVerhalten->getSpeed();
-
-	if (d_StreckenGeschwindigkeit > p_dMaxGeschwindigkeit  || d_StreckenGeschwindigkeit < 0)
+	double dStreckenGeschwindigkeit = p_pVerhalten->getSpeed();
+	
+	if ((dStreckenGeschwindigkeit > p_dMaxGeschwindigkeit  || dStreckenGeschwindigkeit < 0) && p_dTankinhalt > 0)
 	{
 		return p_dMaxGeschwindigkeit;
 	}
+	else if (p_dTankinhalt <= 0)
+	{
+		return 0;
+	}
 	else
 	{
-		return d_StreckenGeschwindigkeit;
+		return dStreckenGeschwindigkeit;
 	}
 }
 
@@ -122,6 +138,3 @@ PKW& PKW::operator =(PKW& fahrzeug)
 	
 		return PKW::PKW(fahrzeug); 
 }
-
-//zeichnen
-//bZeichnen(Namen, relativPos., 

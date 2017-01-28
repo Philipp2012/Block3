@@ -1,4 +1,40 @@
-﻿  main.cpp
-  Weg.cpp
-  Code wird generiert...
-  Aufgabenblock_3.vcxproj -> U:\Documents\Visual Studio 2015\Projects\Aufgabenblock_3-20170110T100132Z\Aufgabenblock_3\Debug\Aufgabenblock_3.exe
+﻿Build started 28.01.2017 16:38:01.
+     1>Project "C:\Users\Philipp\Documents\Visual Studio 2015\Projects\Aufgabenblock_3\Aufgabenblock_3.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Fahrrad.cpp Fahrzeug.cpp FzgFahren.cpp FzgParken.cpp FzgVerhalten.cpp Kreuzung.cpp Losfahren.cpp PKW.cpp Streckenende.cpp Weg.cpp main.cpp
+         Fahrrad.cpp
+         Generating Code...
+         Compiling...
+         main.cpp
+         Weg.cpp
+         Streckenende.cpp
+         PKW.cpp
+         Losfahren.cpp
+         Kreuzung.cpp
+         FzgVerhalten.cpp
+         FzgParken.cpp
+         FzgFahren.cpp
+         Fahrzeug.cpp
+         Generating Code...
+     1>c:\users\philipp\documents\visual studio 2015\projects\aufgabenblock_3\pkw.cpp(139): warning C4172: returning address of local variable or temporary
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Philipp\Documents\Visual Studio 2015\Projects\Aufgabenblock_3\Debug\Aufgabenblock_3.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Philipp\Documents\Visual Studio 2015\Projects\Aufgabenblock_3\Debug\Aufgabenblock_3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Philipp\Documents\Visual Studio 2015\Projects\Aufgabenblock_3\Debug\Aufgabenblock_3.lib" /MACHINE:X86 Debug\AktivesVO.obj
+         Debug\FahrAusnahme.obj
+         Debug\Fahrrad.obj
+         Debug\Fahrzeug.obj
+         Debug\FzgFahren.obj
+         Debug\FzgParken.obj
+         Debug\FzgVerhalten.obj
+         Debug\Kreuzung.obj
+         Debug\Losfahren.obj
+         Debug\main.obj
+         Debug\PKW.obj
+         Debug\Streckenende.obj
+         Debug\Weg.obj
+         SimuClient.lib
+         Aufgabenblock_3.vcxproj -> C:\Users\Philipp\Documents\Visual Studio 2015\Projects\Aufgabenblock_3\Debug\Aufgabenblock_3.exe
+     1>Done Building Project "C:\Users\Philipp\Documents\Visual Studio 2015\Projects\Aufgabenblock_3\Aufgabenblock_3.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:07.23
